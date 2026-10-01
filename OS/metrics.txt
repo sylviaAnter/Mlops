@@ -1,0 +1,12 @@
+RandomForestClassifier - without-imbalance
+Training Accuracy: 89.86%
+Test Accuracy: 86.80%
+----------------------------------------
+RandomForestClassifier - with-class-weights
+Training Accuracy: 89.54%
+Test Accuracy: 83.05%
+----------------------------------------
+RandomForestClassifier - with-SMOTE
+Training Accuracy: 90.38%
+Test Accuracy: 85.30%
+----------------------------------------

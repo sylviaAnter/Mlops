@@ -1,0 +1,54 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python pipeline/stage_01_prepare.py
+    deps:
+    - path: data/my_data.xlsx
+      hash: md5
+      md5: 84aeda2931eec819ab7c7cd5f3f5838a
+      size: 8980
+    - path: pipeline/stage_01_prepare.py
+      hash: md5
+      md5: b77b5e918bdfdfb22dc6ad548eedf54a
+      size: 231
+    outs:
+    - path: artifacts/processed.xlsx
+      hash: md5
+      md5: 65db480b34d2a5fea136144008c76efc
+      size: 5427
+  train:
+    cmd: python pipeline/stage_02_train.py
+    deps:
+    - path: artifacts/processed.xlsx
+      hash: md5
+      md5: 65db480b34d2a5fea136144008c76efc
+      size: 5427
+    - path: pipeline/stage_02_train.py
+      hash: md5
+      md5: de43f42420f571359c2b3977b02129a1
+      size: 522
+    outs:
+    - path: artifacts/model.pkl
+      hash: md5
+      md5: 8896f3ad9c2c58014d8e6b80d45f1253
+      size: 967
+  evaluate:
+    cmd: python pipeline/stage_03_evaluate.py
+    deps:
+    - path: artifacts/model.pkl
+      hash: md5
+      md5: 8896f3ad9c2c58014d8e6b80d45f1253
+      size: 967
+    - path: artifacts/processed.xlsx
+      hash: md5
+      md5: 65db480b34d2a5fea136144008c76efc
+      size: 5427
+    - path: pipeline/stage_03_evaluate.py
+      hash: md5
+      md5: 039a89dd04d728b399d3679b6a19edf3
+      size: 612
+    outs:
+    - path: artifacts/metrics.txt
+      hash: md5
+      md5: b9e9aa8b25154df777f18d544f3bc415
+      size: 22

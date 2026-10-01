@@ -1,0 +1,23 @@
+stages:
+ prepare:
+  cmd: python pipeline/stage_01_prepare.py
+  deps:
+  - pipeline/stage_01_prepare.py
+  - data/my_data.xlsx
+  outs:
+  - artifacts/processed.xlsx 
+ train:
+  cmd: python pipeline/stage_02_train.py
+  deps:
+  - pipeline/stage_02_train.py
+  - artifacts/processed.xlsx
+  outs:
+  - artifacts/model.pkl
+ evaluate:
+  cmd: python pipeline/stage_03_evaluate.py
+  deps:
+  - pipeline/stage_03_evaluate.py
+  - artifacts/processed.xlsx
+  - artifacts/model.pkl
+  outs:
+  - artifacts/metrics.txt
